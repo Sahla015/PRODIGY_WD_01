@@ -3,190 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <title>Gradient Landing Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .grid-item {
-            width: 100px;
-            height: 100px;
-            font-size: 2rem;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 flex flex-col items-center justify-center p-6">
-    <h1 class="text-4xl font-bold text-white mb-2">Tic-Tac-Toe</h1>
-    
-    <!-- Mode Selection -->
-    <div id="modeSelection" class=" flex justify-between gap-4 items-center ">
-        <button id="vsOpponent" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md">Vs Opponent</button>
-        <button id="vsComputer" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md">Vs Computer</button>
-    </div>
-    
-    <!-- Status Message -->
-    <p id="status" class="text-xl font-semibold text-white mt-8 hidden"></p>
-
-    <!-- Tic Tac Toe Grid -->
-    <div id="gameBoard" class="hidden grid grid-cols-3 gap-4 bg-white bg-opacity-20 backdrop-blur-lg p-8 rounded-2xl shadow-lg">
-        <div id="0" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="1" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="2" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="3" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="4" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="5" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="6" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-
-        <div id="7" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-        <div id="8" class="grid-item bg-white bg-opacity-30 hover:bg-white rounded-md flex items-center justify-center cursor-pointer text-black font-bold"></div>
-    </div>
-
-
-    <div class="flex justify-center items-center gap-4 mt-2">
-        <!-- Restart Button -->
-    <button 
-    id="restartBtn" 
-    class="hidden  bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-all duration-200"
->
-    Restart Game
-</button>
-
-<!-- Back Button -->
-<button 
-    id="backBtn" 
-    class="hidden  bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-all duration-200"
->
-    Back to Mode Selection
-</button>
-
-    </div>
     <script>
-        const cells = document.querySelectorAll('.grid-item');
-        const statusDisplay = document.getElementById('status');
-        const restartBtn = document.getElementById('restartBtn');
-        const backBtn = document.getElementById('backBtn');
-        const modeSelection = document.getElementById('modeSelection');
-        const gameBoard = document.getElementById('gameBoard');
-        let currentPlayer = 'X';
-        let gameState = ['', '', '', '', '', '', '', '', ''];
-        let gameActive = true;
-        let isVsComputer = false;
-
-        const winningConditions = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
-
-        // Handle cell click
-        function handleCellClick(event) {
-            const clickedCell = event.target;
-            const clickedCellIndex = parseInt(clickedCell.id);
-
-            if (gameState[clickedCellIndex] !== '' || !gameActive) {
-                return;
-            }
-
-            gameState[clickedCellIndex] = currentPlayer;
-            clickedCell.textContent = currentPlayer;
-
-            if (checkForWinner()) {
-                statusDisplay.textContent = `Player ${currentPlayer} wins!`;
-                gameActive = false;
-                return;
-            }
-
-            if (!gameState.includes('')) {
-                statusDisplay.textContent = 'It\'s a draw!';
-                gameActive = false;
-                return;
-            }
-
-            if (isVsComputer && currentPlayer === 'X') {
-                currentPlayer = 'O';
-                statusDisplay.textContent = `It's ${currentPlayer}'s turn`;
-                setTimeout(() => makeComputerMove(), 500);
-            } else {
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                statusDisplay.textContent = `It's ${currentPlayer}'s turn`;
-            }
-        }
-
-        // Simple AI for vs Computer mode
-        function makeComputerMove() {
-            let availableCells = gameState
-                .map((cell, index) => (cell === '' ? index : null))
-                .filter(index => index !== null);
-
-            const randomIndex = availableCells[Math.floor(Math.random() * availableCells.length)];
-            gameState[randomIndex] = 'O';
-            cells[randomIndex].textContent = 'O';
-
-            if (checkForWinner()) {
-                statusDisplay.textContent = 'Computer wins!';
-                gameActive = false;
-                return;
-            }
-
-            currentPlayer = 'X';
-            statusDisplay.textContent = `It's ${currentPlayer}'s turn`;
-        }
-
-        // Check for winner
-        function checkForWinner() {
-            for (let i = 0; i < winningConditions.length; i++) {
-                const [a, b, c] = winningConditions[i];
-                if (gameState[a] === gameState[b] && gameState[b] === gameState[c] && gameState[a] !== '') {
-                    return true;
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
                 }
             }
-            return false;
         }
-
-        // Restart the game
-        function restartGame() {
-            gameState = ['', '', '', '', '', '', '', '', ''];
-            gameActive = true;
-            currentPlayer = 'X';
-            cells.forEach(cell => cell.textContent = '');
-            statusDisplay.textContent = `It's X's turn`;
-        }
-
-        // Game mode selection
-        document.getElementById('vsOpponent').addEventListener('click', () => {
-            isVsComputer = false;
-            startGame();
-        });
-
-        document.getElementById('vsComputer').addEventListener('click', () => {
-            isVsComputer = true;
-            startGame();
-        });
-
-        // Function to start the game
-        function startGame() {
-            modeSelection.classList.add('hidden');
-            gameBoard.classList.remove('hidden');
-            statusDisplay.classList.remove('hidden');
-            restartBtn.classList.remove('hidden');
-            backBtn.classList.remove('hidden');
-            restartGame();
-        }
-
-        // Back button to return to the mode selection
-        backBtn.addEventListener('click', () => {
-            modeSelection.classList.remove('hidden');
-            gameBoard.classList.add('hidden');
-            statusDisplay.classList.add('hidden');
-            restartBtn.classList.add('hidden');
-            backBtn.classList.add('hidden');
-        });
-
-        cells.forEach(cell => cell.addEventListener('click', handleCellClick));
-        restartBtn.addEventListener('click', restartGame);
     </script>
+</head>
+<body class="bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 min-h-screen font-sans text-white">
+    <header class="container mx-auto px-4 py-8">
+        <nav class="flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">GradientLand</a>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300">Features</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300">Pricing</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition duration-300">Contact</a></li>
+            </ul>
+            <button class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-16">
+        <section class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-bounce-slow">Welcome to GradientLand</h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-2xl mx-auto">Discover the beauty of gradients and animations in web design. Create stunning websites that captivate your audience.</p>
+            <a href="#" class="bg-white text-purple-600 font-bold py-3 px-8 rounded-full hover:bg-yellow-300 hover:text-purple-700 transition duration-300 inline-block">Get Started</a>
+        </section>
+
+        <section class="mt-24 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-3xl md:text-4xl font-bold">Stunning Gradients</h2>
+                <p class="text-lg">Our platform offers a wide range of beautiful gradients that will make your website stand out. Easily customize and apply them to your projects.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Seamless color transitions</li>
+                    <li>Customizable color palettes</li>
+                    <li>Easy-to-use gradient generator</li>
+                </ul>
+            </div>
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" alt="Gradient Example" class="rounded-lg shadow-2xl">
+            </div>
+        </section>
+
+        <section class="mt-24 grid md:grid-cols-3 gap-8">
+            <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-filter backdrop-blur-lg">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2426&q=80" alt="Feature 1" class="w-16 h-16 object-cover rounded-full mb-4">
+                <h3 class="text-xl font-bold mb-4">Easy Integration</h3>
+                <p>Seamlessly integrate our gradients and animations into your existing projects with just a few lines of code.</p>
+            </div>
+            <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-filter backdrop-blur-lg">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" alt="Feature 2" class="w-16 h-16 object-cover rounded-full mb-4">
+                <h3 class="text-xl font-bold mb-4">Responsive Design</h3>
+                <p>Our gradients and animations are fully responsive, ensuring a consistent look across all devices and screen sizes.</p>
+            </div>
+            <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-filter backdrop-blur-lg">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" alt="Feature 3" class="w-16 h-16 object-cover rounded-full mb-4">
+                <h3 class="text-xl font-bold mb-4">Performance Optimized</h3>
+                <p>Enjoy smooth animations and gradient transitions without compromising on your website's performance.</p>
+            </div>
+        </section>
+
+        <section class="mt-24 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Ready to get started?</h2>
+            <a href="#" class="bg-white text-purple-600 font-bold py-3 px-8 rounded-full hover:bg-yellow-300 hover:text-purple-700 transition duration-300 inline-block">Sign Up Now</a>
+        </section>
+    </main>
+
+    <footer class="bg-purple-800 py-8 mt-24">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 GradientLand. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
